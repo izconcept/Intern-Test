@@ -1,6 +1,5 @@
 import json, urllib2
 
-
 pokemonNumber = '25';
 
 # Declaring headers + making GET request
