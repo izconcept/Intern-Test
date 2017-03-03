@@ -22,10 +22,13 @@ def parseIntoJSON(node):
 
     return {node.tag: x}
 
+# Create tree from xml file
 tree = ET.parse("book_list.xml")
 root = tree.getroot()
 
+# Convert XML tree to JSON
 x = parseIntoJSON(root)
 
+# Write JSON to local file
 with open('parsedXML.txt', 'w') as file:
     json.dump(x, file, indent = 4)
