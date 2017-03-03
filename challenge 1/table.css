@@ -1,0 +1,8 @@
+th:hover {
+    background-color: #666dc4;
+    color: white;
+    cursor: pointer;
+}
+.selected {
+    background-color: rgba(0,0,0,.2)
+}

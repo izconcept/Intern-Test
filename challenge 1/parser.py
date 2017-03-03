@@ -1,3 +1,4 @@
+# A generic XML to JSON converter written in Python
 import xml.etree.ElementTree as ET
 import json
 
