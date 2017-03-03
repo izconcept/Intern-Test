@@ -3,12 +3,11 @@ import json, urllib2
 
 pokemonNumber = '25';
 
+# Declaring headers + making GET request
 opener = urllib2.build_opener()
 opener.addheaders = [('User-Agent', 'Mozilla/5.0')]
 pokemonRaw = json.load(opener.open('http://pokeapi.co/api/v2/pokemon/' + pokemonNumber))
 
-print pokemonRaw.keys()
-print pokemonRaw['types']
 
 # OPTIONAL: Cleaning up the return
 pokemonClean = {}

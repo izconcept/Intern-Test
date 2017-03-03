@@ -1,36 +1,28 @@
+import xml.etree.ElementTree as ET
+import pprint
 
-def parseIntoJSON(filePath):
-    file = open(filePath)
+def parseIntoJSON(node):
+
     x = {}
-    while True:
-        c = file.read(1)
 
-        if not c:
-            break
+    for subelem in node:
+        v = parseIntoJSON(subelem)
+        tag = subelem.tag
+        value = v[tag]
+        try:
+            x[tag].append(value)
+        except KeyError: #
+           x[tag] = value
+        except AttributeError:
+            x[tag] = [x[tag], value]
 
-        if c == "<":
-            c = file.read(1)
-            if c == "!" or c == "?":
-                print 'no good'
-            if c == "/":
+    if not x:
+        x = node.text
+    return {node.tag: x}
 
-            else:
-                key = ""
-                while True:
-                    c = file.read(1)
-                    if(c == ">"):
-                        stack.append(key)
-                        break
-                    else:
-                        key += c
+tree = ET.parse("book_list.xml")
+root = tree.getroot()
+x = parseIntoJSON(root)
 
-
-
-#parseIntoJSON("book_list.xml")
-
-file = {}
-file['x'] = {}
-y = file['x']
-y = 'das'
-
-print file
+printer = pprint.PrettyPrinter(indent=4)
+printer.pprint(x)
