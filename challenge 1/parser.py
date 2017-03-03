@@ -13,7 +13,7 @@ def parseIntoJSON(filePath):
             if c == "!" or c == "?":
                 print 'no good'
             if c == "/":
-                
+
             else:
                 key = ""
                 while True:
