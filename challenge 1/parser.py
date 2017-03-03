@@ -14,7 +14,7 @@ def parseIntoJSON(node):
             x[key] = value
         elif isinstance(x[key], list): # If it's already an array, append to the array
             x[key].append(value)
-        else: # If it the key already exists, we need to convert it to an array
+        else: # If the key already exists but it isn't already an array, we need to convert it to an array
             x[key] = [x[key], value]
 
     if not x: # Base case: When there aren't sub-nodes -> Take text value
@@ -24,6 +24,7 @@ def parseIntoJSON(node):
 
 tree = ET.parse("book_list.xml")
 root = tree.getroot()
+
 x = parseIntoJSON(root)
 
 with open('parsedXML.txt', 'w') as file:

@@ -4,15 +4,47 @@
     <meta charset="UTF-8">
     <title>Challenge1</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+    <style>
+        th {
+            padding: 5px;
+        }
+        td {
+            padding: 5px;
+        }
+    </style>
 </head>
 <body>
-    <table>
+    <table border="1">
         <tr id="tHead"></tr>
     </table>
 
     <script type="text/javascript">
         $(function() {
+            $.ajax({
+                type: "GET",
+                //Hosting JSON on personal server so I can retrieve it without having to run a local server to distribute files
+                url: "http://izkevin.com/distributer/parsedXML.txt",
+                success: function(data) {
+                    console.log(data)
+                    file = JSON.parse(data);
 
+                    headers = Object.keys(file['catalog']['book'][0]);
+                    headers.forEach(function(header) {
+                        $("#tHead").append("<th>"+header+"</th>");
+                    });
+
+                    file['catalog']['book'].forEach(function(book) {
+                        $("table").append("<tr></tr>")
+                        Object.keys(book).forEach(function(key) {
+                            $("tr").last().append("<td>" + book[key] + "</td>")
+                        })
+                    })
+
+                }
+            })
         })
     </script>
 </body>
